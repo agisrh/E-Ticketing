@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Jul 11, 2017 at 06:51 PM
+-- Generation Time: Jul 27, 2017 at 08:00 AM
 -- Server version: 5.6.35
 -- PHP Version: 5.6.30
 
@@ -120,7 +120,17 @@ INSERT INTO `log_aktifitas` (`id_log`, `id_user`, `aktifitas`, `tanggal`, `waktu
 (138, 1, 'Mengubah data tiket', '2017-07-10', '22:32:01'),
 (139, 2, 'Melakuan transaksi', '2017-07-10', '22:33:41'),
 (140, 2, 'Melakuan transaksi', '2017-07-10', '22:34:04'),
-(141, 2, 'Melakuan transaksi', '2017-07-10', '22:34:57');
+(141, 2, 'Melakuan transaksi', '2017-07-10', '22:34:57'),
+(142, 1, 'Menghapus salah satu user', '2017-07-22', '23:49:53'),
+(143, 1, 'Menambahkan user baru', '2017-07-22', '23:50:38'),
+(144, 1, 'Mengubah data user', '2017-07-22', '23:57:20'),
+(145, 21, 'Melakuan transaksi', '2017-07-23', '00:00:16'),
+(146, 1, 'Menghapus loket tiket', '2017-07-23', '11:40:54'),
+(147, 1, 'Mengubah data user', '2017-07-23', '11:41:33'),
+(148, 1, 'Mengubah data user', '2017-07-23', '11:41:46'),
+(149, 1, 'Menambahkan user baru', '2017-07-23', '11:42:42'),
+(150, 1, 'Melakuan transaksi', '2017-07-27', '21:37:42'),
+(151, 1, 'Melakuan transaksi', '2017-07-27', '21:42:15');
 
 -- --------------------------------------------------------
 
@@ -141,8 +151,7 @@ CREATE TABLE `loket` (
 INSERT INTO `loket` (`id_loket`, `nama_loket`, `posisi`) VALUES
 (2, 'Loket A', 'Gerbang Pintu A'),
 (3, 'Loket B', 'Gerbang Pintu B'),
-(4, 'Loket C', 'Gerbang Pintu C'),
-(5, 'Loket D', 'Gerbang Pintu D');
+(4, 'Loket C', 'Gerbang Pintu C');
 
 -- --------------------------------------------------------
 
@@ -165,9 +174,9 @@ CREATE TABLE `tiket` (
 
 INSERT INTO `tiket` (`kode_tiket`, `id_kategori`, `nama_tiket`, `deskripsi`, `stok`, `harga`) VALUES
 ('0001', 1, 'Spiderman Home Coming', 'Deskripsi', 184, '40000'),
-('0002', 2, 'Travel', 'Desc', 9, '400000'),
-('0003', 4, 'Outdoor', 'Tiket Outdoor', 29, '50000'),
-('0004', 4, 'Renang', 'Tiket Renang', 67, '20000');
+('0002', 2, 'Travel', 'Desc', 8, '400000'),
+('0003', 4, 'Outdoor', 'Tiket Outdoor', 26, '50000'),
+('0004', 4, 'Renang', 'Tiket Renang', 65, '20000');
 
 -- --------------------------------------------------------
 
@@ -199,7 +208,10 @@ INSERT INTO `transaksi` (`no_trans`, `id_user`, `kode_tiket`, `id_loket`, `jumla
 ('20170710221935', 2, '0001', 2, 2, '2017-07-10', '22:19:50', '80000'),
 ('20170710223320', 2, '0004', 4, 3, '2017-07-10', '22:33:41', '60000'),
 ('20170710223349', 2, '0003', 5, 1, '2017-07-10', '22:34:04', '50000'),
-('20170710223443', 2, '0002', 3, 4, '2017-07-10', '22:34:57', '1600000');
+('20170710223443', 2, '0002', 3, 4, '2017-07-10', '22:34:57', '1600000'),
+('20170723000007', 21, '0003', 3, 3, '2017-07-23', '00:00:16', '150000'),
+('20170727213558', 1, '0004', 2, 2, '2017-07-27', '21:37:41', '40000'),
+('20170727214205', 1, '0002', 2, 1, '2017-07-27', '21:42:15', '400000');
 
 -- --------------------------------------------------------
 
@@ -219,6 +231,7 @@ CREATE TABLE `users` (
   `title` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `blokir` enum('Y','N') COLLATE latin1_general_ci NOT NULL DEFAULT 'N',
   `id_session` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `id_loket` int(5) NOT NULL,
   `last_login` datetime DEFAULT NULL,
   `locktype` varchar(1) COLLATE latin1_general_ci NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -227,9 +240,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `username`, `password`, `nama_lengkap`, `email`, `telpon`, `foto`, `level`, `title`, `blokir`, `id_session`, `last_login`, `locktype`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'admin@detik.com', '08123456789', 'picture.jpg', '1', 'Administrator', 'N', 'ai2an56o6pt02ri43sjvht3af4', '2017-07-10 22:26:10', '0'),
-(2, 'agis', 'ea97c1040f4405b9c9466b60fdd9fdf4', 'Agis Rahma Herdiana', 'agis.rahma.herdiana@gmail.com', '085860803101', '', '2', 'Staff', 'N', '1a061cdaspisd0emjcg9ba4ec5', '2017-07-10 22:33:01', '0');
+INSERT INTO `users` (`id_user`, `username`, `password`, `nama_lengkap`, `email`, `telpon`, `foto`, `level`, `title`, `blokir`, `id_session`, `id_loket`, `last_login`, `locktype`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'admin@detik.com', '08123456789', 'picture.jpg', '1', 'Administrator', 'N', 'u0l518f1bplh6mqa4h6orflop4', 2, '2017-07-27 21:02:03', '0'),
+(21, 'staff', '1253208465b1efa876f982d8a9e73eef', 'Staff 1', 'staff@tiket.com', '0811111111111', '', '2', 'Staff', 'N', 'vr8doevdprfn1r3d1hibrfmjh1', 3, '2017-07-22 23:59:58', '0'),
+(22, 'staff2', '8bc01711b8163ec3f2aa0688d12cdf3b', 'Staff 2', 'staff2@tiket.com', '082222222222222', '', '2', 'Staff', 'N', '', 4, NULL, '0');
 
 --
 -- Indexes for dumped tables
@@ -284,17 +298,17 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `log_aktifitas`
 --
 ALTER TABLE `log_aktifitas`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 --
 -- AUTO_INCREMENT for table `loket`
 --
 ALTER TABLE `loket`
-  MODIFY `id_loket` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_loket` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;COMMIT;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
