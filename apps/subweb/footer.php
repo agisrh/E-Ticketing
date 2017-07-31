@@ -75,7 +75,7 @@
      <!-- /datepicker -->
     <script type='text/javascript'>
         $(document).ready(function () {
-            $('#single_cal1').daterangepicker({
+            $('.single_cal1').daterangepicker({
                 singleDatePicker: true,
                 format: 'YYYY/MM/DD',
                 calender_style: 'picker_1'

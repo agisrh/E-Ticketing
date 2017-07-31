@@ -43,6 +43,7 @@ if ($mod=='login' AND $act=='searchlocktype'){
             $_SESSION['id_user']      = $data[id_user];
             $_SESSION['level_user']   = $data[level];
             $_SESSION['nama_user']    = $data[nama_lengkap];
+            $_SESSION['loket']        = $data[id_loket];
             $_SESSION['tanggal']      = date('Y-m-d');
             $_SESSION['waktu']        = date('H:i:s');
             $_SESSION['login']        = 1;

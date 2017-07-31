@@ -4,6 +4,10 @@ $tiket=$query->get_tiket($row['kode_tiket']);
 $loket=$query->get_loket($row['id_loket']);
 $staff=$query->get_user($row['id_user']);
 $tanggal = tgl_indo($row['tanggal']);
+function rupiah($angka)
+  {
+  return 'Rp '. number_format($angka,2,',','.');
+  }
 ?>
 <div class="row">
 
@@ -62,8 +66,11 @@ $tanggal = tgl_indo($row['tanggal']);
 
                       <div class="">
                         <div class="product_price">
-                          <h1 class="price"><?php echo "Rp.$row[total].-"; ?></h1>
-                          <span class="price-tax"><?php echo "($row[jumlah] x Rp.$tiket[harga])"; ?></span>
+                          <h1 class="price"><?php
+                          $uang = rupiah($row[total]);
+                          $harga = rupiah($tiket[harga]);
+                           echo "$uang.-"; ?></h1>
+                          <span class="price-tax"><?php echo "($row[jumlah] x $harga)"; ?></span>
                           <br>
                         </div>
                       </div>

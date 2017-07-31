@@ -38,6 +38,21 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Loket</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <select name="loket" class="select2_single form-control" tabindex="-1">
+                                                    <option value='0'>Pilih Loket Tiket</option>
+                                                    <?php
+                                                    $loket = $query->show_loket();
+                                                    foreach($loket as $l){
+                                                    echo"<option value='$l[id_loket]'>$l[nama_loket]</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -122,6 +137,7 @@ $c = md5($_POST['password']);
 $d = $_POST['email'];
 $e = $_POST['telpon'];
 $f = $_POST['jabatan'];
+$g = $_POST['loket'];
 
 if(isset($_POST['save'])){
     // if(empty($a) or empty($b) or empty($c) or empty($d) or empty($e) or empty($f)){
@@ -140,7 +156,7 @@ if(isset($_POST['save'])){
     //     });
     // </script>";
     // }else{
-        $query->add_user($a,$b,$c,$d,$e,$f);
+        $query->add_user($a,$b,$c,$d,$e,$f,$g);
         $query->log_aktifitas($_SESSION[id_user],'Menambahkan user baru',date('Y-m-d'),date('H:i:s'));
         echo "<script>window.location='admin.php?module=user';</script>";
     //}

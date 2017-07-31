@@ -113,9 +113,6 @@ else {
                                 <li><a href="?module=transaksi"><i class="fa fa-money"></i> Transaksi</a></li>
                                    
                             </ul>
-                            <ul class="nav side-menu">
-                                <li><a href="?module=laporan"><i class="fa fa-bar-chart"></i> Laporan</a></li>  
-                            </ul>
                         </div>
 
                     </div>

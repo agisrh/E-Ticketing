@@ -27,6 +27,31 @@ $row = $query->get_user($_GET['id']);
                                             </div>
                                         </div>
 
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Username</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <input type="text" required value="<?php echo "$row[username]"; ?>" disabled="disabled" class="form-control" >
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Loket</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <select name="loket" class="select2_single form-control" tabindex="-1">
+                                                    <option value='0'>Pilih Loket</option>
+                                                     <?php
+                                                     // Menampilkan pilihan loket
+                                                     $loket = $query->show_loket();
+                                                     foreach($loket as $data) {
+                                                     echo "<option value='".$data['id_loket']."'";
+                                                     echo  $data['id_loket']==$row['id_loket'] ? 'selected' : '';
+                                                     echo ">$data[nama_loket]";
+                                                     echo "</option>";
+                                                     }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
@@ -110,6 +135,7 @@ $a = $_POST['a'];
 $b = $_POST['b'];
 $c = $_POST['c'];
 $d = $_POST['d'];
+$e = $_POST['loket'];
 
 
 if(isset($_POST['save'])){
@@ -129,7 +155,7 @@ if(isset($_POST['save'])){
     //     });
     // </script>";
     // }else{
-        $query->edit_user($id,$a,$b,$c,$d);
+        $query->edit_user($id,$a,$b,$c,$d,$e);
         $query->log_aktifitas($_SESSION[id_user],'Mengubah data user',date('Y-m-d'),date('H:i:s'));
         echo "<script>window.location='admin.php?module=user';</script>";
     //}

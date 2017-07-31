@@ -111,6 +111,18 @@ if ($_GET['module']=='log_aktifitas')
 include "module/log_aktifitas/log.php";
 }
 
+else    
+if ($_GET['module']=='laporan')
+{ 
+include "module/laporan/laporan.php";
+}
+else    
+if ($_GET['module']=='print')
+{ 
+include "module/laporan/print.php";
+}
+
+
 
 else
 {

@@ -1,4 +1,21 @@
 
+ <script>
+        function harga(tiket)
+       {
+       $.ajax({
+       url:'module/transaksi/harga.php',
+        data:'tiket='+tiket,
+        type:"post",
+        dataType:"html",
+        timeout:10000,
+        success:function(response){
+            $('#data').html(response);
+        }
+            });   
+        }
+</script>
+
+
 <div class="col-md-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -38,7 +55,7 @@
                                          <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tiket</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <select name="tiket" class="select2_single form-control" tabindex="-1">
+                                                <select name="tiket" onchange="harga(this.value);" class="select2_single form-control" tabindex="-1">
                                                     <option value='0'>Pilih Tiket</option>
                                                     <?php
                                                     $tiket = $query->all_tiket();
@@ -50,20 +67,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Loket</label>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <select name="loket" class="select2_single form-control" tabindex="-1">
-                                                    <option value='0'>Pilih Loket Tiket</option>
-                                                    <?php
-                                                    $loket = $query->show_loket();
-                                                    foreach($loket as $l){
-                                                    echo"<option value='$l[id_loket]'>$l[nama_loket]</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
 
                                          <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jumlah</label>
@@ -71,6 +74,7 @@
                                                 <input type="text" name="jumlah" required class="form-control" placeholder="Jumlah">
                                             </div>
                                         </div>
+                                        <div id="data"></div>
 
                                          <!-- <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Harga</label>
@@ -146,7 +150,7 @@
 $no      = $_POST['no'];
 $user    = $_SESSION['id_user'];
 $tiket   = $_POST['tiket'];
-$loket   = $_POST['loket'];
+$loket   = $_SESSION['loket'];
 $jumlah  = $_POST['jumlah'];
 $tanggal = date("Y-m-d");
 $jam     = date("H:i:s");
@@ -176,6 +180,6 @@ if(isset($_POST['save'])){
         $query->add_transaksi($no,$user,$tiket,$loket,$jumlah,$tanggal,$jam,$total);
         $query->kurangi_tiket($tiket,$count);
         $query->log_aktifitas($_SESSION[id_user],'Melakuan transaksi',date('Y-m-d'),date('H:i:s'));
-        echo "<script>window.location='admin.php?module=transaksi';</script>";
+        echo "<script>window.location='admin.php?module=print_transaksi&id=$no';</script>";
     }
 }

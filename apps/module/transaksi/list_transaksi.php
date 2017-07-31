@@ -65,7 +65,7 @@
                                        if($_SESSION['level_user']=='1'){
                                         $data = $query->show_transaksi();
                                       }else{
-                                        $data = $query->user_transaksi($_SESSION['level_user']);
+                                        $data = $query->user_transaksi($_SESSION['id_user']);
                                       }
                                       foreach ($data as $row){
                                             
