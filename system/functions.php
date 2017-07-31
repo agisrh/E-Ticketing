@@ -209,8 +209,8 @@ class Functions {
         return $hasil;
     }
 
-    public function add_user($nama,$username,$password,$email,$telpon,$jabatan){
-        $query = "INSERT INTO users (username,password,nama_lengkap,email,telpon,level,title) VALUES('$username','$password','$nama','$email','$telpon','2','$jabatan')";
+    public function add_user($nama,$username,$password,$email,$telpon,$jabatan,$loket){
+        $query = "INSERT INTO users (username,password,nama_lengkap,email,telpon,level,title,id_loket) VALUES('$username','$password','$nama','$email','$telpon','2','$jabatan','$loket')";
         mysql_query($query);
     }
 
@@ -219,8 +219,8 @@ class Functions {
         mysql_query($query);
     }
     
-    public function edit_user($id_user,$nama,$email,$telpon,$jabatan){
-        $query  = "UPDATE users SET nama_lengkap='$nama', email='$email', telpon='$telpon', title='$jabatan' 
+    public function edit_user($id_user,$nama,$email,$telpon,$jabatan,$loket){
+        $query  = "UPDATE users SET nama_lengkap='$nama', email='$email', telpon='$telpon', title='$jabatan', id_loket='$loket' 
         WHERE id_user='$id_user'";
         mysql_query($query);
     }
