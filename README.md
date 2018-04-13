@@ -19,7 +19,7 @@ This program requires some supporting software to run, that is :
 ### Built With
 * PHP 5.6
 * MySQL 5.0
-* Bootstrap
+* Bootstrap v3.3.2
 
 ### Versioning
 E-ticketing ver 1.0
